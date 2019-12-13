@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Supply Chain</title>
+    <style>
+        body {
+          background:url("https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1576235127512&di=1e8e850aaea2cbe4e8499b28c8477492&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F17%2F49%2F60%2F20p58PICRY2_1024.jpg") no-repeat;
+          background-size: 100%;
+          text-align:center;
+          font-family: Georgia, Garamond, sans-serif;
+          font-size: 11pt;
+        }
+        h1 {
+          color: rgb(112, 112, 11);
+          font-family: Century Gothic, Futura, Verdana, sans-serif;
+          text-align: center;
+          font-size: 30pt;
+          font-weight: bold;
+        }
+        h2 {
+          color: rgb(112, 112, 11);
+          font-family: Century Gothic, Futura, Verdana, sans-serif;
+          background-color: rgba(240, 240, 240, 0.445);
+          text-align: center;
+          font-weight: bold;
+        }
+        h3 {
+          color:  rgb(59, 59, 5);
+          font-family: Century Gothic, Futura, Verdana, sans-serif;
+          font-size: 18px;
+        }
+        label {
+          color: rgb(59, 59, 5);
+          font-family: Century Gothic, Futura, Verdana, sans-serif;
+          font-size: 15px;
+        }
+        .nav{
+            width: 200px;
+            height: 20px;
+            text-align:left;
+            margin-top: 50px;
+            margin-left:1%;
+            border-radius: 10px;
+        }
+        .nav h2:hover{
+            color:rgb(180, 180, 48);
+        }
+        #bf{
+          color: rgb(112, 112, 11);
+          font-family: Century Gothic, Futura, Verdana, sans-serif;
+          font-size: 16px;
+          text-align: left;
+          font-weight: normal;
+          width: 1200px;
+          margin-left:10%;
+
+        }
+        #account{
+          text-align: center;
+          line-height: 100%;
+          width: 400px;
+          height: 150px;
+          margin: auto;
+          background-color: rgba(206, 211, 162, 0.418);
+          border-radius: 10px;
+        }
+        #message{
+          text-align: center;
+          line-height: 100%;
+          width: 400px;
+          height: 100px;
+          margin: auto;
+          background-color: rgba(206, 211, 162, 0.418);
+          border-radius: 10px;
+        }
+
+       
+    </style>
+    
+</head>
+
+  <body>
+    <h1>Supplychain</h1>
+    <p id="bf">Brief Introduction:<br />
+      This system can record every transaction and receipt in the supply chain, 
+      and at the same time introduce the bank to confirm the transaction of these information, 
+      to ensure the authenticity of the transaction and documents. <br />
+      It supports 4 basic functions: purchase from the suppliers companies, transfer receipts, financing and payment.
+
+    </p>
+    <div class="nav" id="accountNav">
+        <br />
+        <h2><a onclick="Nav.NewAccount()">Sign Up</a></h2>
+        <h2><a onclick="Nav.purchase()">Purchase</a></h2>
+        <h2><a onclick="Nav.receiptTrans()">Receipt Transfer</a></h2>
+        <h2><a onclick="Nav.financing()">Financing</a></h2>
+        <h2><a onclick="Nav.payment()">Payment</a></h2>
+     
+    </div>
+    
+    <div id="account">
+      <h2>Sign In </h2>
+      <label for="account-input" id="current-account">Account ID:</label>
+      <input id="account-input" type="text" ></input>
+      <button id="send" onclick="App.changeAccount()">Sign In</button>
+      <br>
+      <p>Current Account: &emsp;<strong id="account-address">unset</strong></p>
+    </div>
+
+    <div id="message">
+        <h2>Account Info</h2>
+        <p>Company Name: <strong id="name">unset</strong></p>
+        <p>You have <strong id="balance">unset</strong> balances</p>
+    </div>
+
+    <div id="add" class="feature">
+        <h3>New Account</h3>
+        <label for="add-cname">Company name:</label>
+        <input type="text" id="add-cname" /><br>
+
+        <br><label for="add-caddress">Company address:</label>
+        <input
+            type="text"
+            id="add-caddress"
+        /><br>
+
+        <br><label for="add-isbank">Company isbank(is=1,is not=0):</label>
+        <input type="text" id="add-isbank" /><br>
+
+        <br><label for="add-cbalance">Company balance:</label>
+        <input type="text" id="add-cbalance" /><br>
+
+        <p class="status" id="status0"></p>
+        <button onclick="App.NewAccount()">Sign Up</button>
+    </div>
+
+    <div id="sign" class="feature">
+        <h3>Purchase</h3>
+        <label for="sign-caddress">Company address:</label>
+        <input
+            type="text"
+            id="sign-caddress"
+        /><br>
+
+        <br><label for="sign-amount">amount:</label>
+        <input type="text" id="sign-amount" /><br>
+
+        <br><label for="sign-time">time:</label>
+        <input type="text" id="sign-time" /><br>
+
+        <p class="status" id="status1"></p>
+        <button onclick="App.purchase()">OK</button>
+    </div>
+
+    <div id="transfer" class="feature">
+        <h3>Receipt Transfer</h3>
+        <label for="transfer-caddress">Company address:</label>
+        <input
+            type="text"
+            id="transfer-caddress"
+           
+        /><br>
+
+        <br><label for="transfer-amount">amount:</label>
+        <input type="text" id="transfer-amount"  /><br>
+
+        <br><label for="transfer-rid">Receipt No.</label>
+        <input type="text" id="transfer-rid" /><br>
+
+        <p class="status" id="status2"></p>
+        <button onclick="App.receiptTrans()">OK</button>
+    </div>
+
+    <div id="financing" class="feature">
+        <h3>Financing</h3>
+
+        <label for="financing-rid">Receipt No.</label>
+        <input type="text" id="financing-rid" />
+
+        <p class="status" id="status3"></p>
+        <button onclick="App.financing()">OK</button>
+    </div>
+
+    <div id="pay" class="feature">
+        <h3>Payment</h3>
+        
+        <label for="payment-rid">Receipt No.</label>
+        <input type="text" id="payment-rid" />
+        <p class = "status" id="status4"></p>
+        <button onclick="App.payment()">OK</button>
+    </div>
+   
+
+    <script src="index.js">
+    /*function goTop() {
+        $('html, body').animate({scrollTop:0}, 'slow'); 
+        }
+        function goDiv(div) {
+        var a = $("#"+div).offset().top;
+        $("html,body").animate({scrollTop:a}, 'slow'); 
+        }
+        function goBottom() {
+        window.scrollTo(0, document.documentElement.scrollHeight-document.documentElement.clientHeight); 
+        }*/
+    </script>
+
+  </body>
+</html>
